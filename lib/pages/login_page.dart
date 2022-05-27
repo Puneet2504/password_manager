@@ -23,9 +23,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const SizedBox(height: 100),
           ImageAssets(),
-          const SizedBox(height: 40),
-          const SizedBox(height: 16),
-          const SizedBox(height: 8),
+          const SizedBox(height: 64),
           const Align(
             alignment: Alignment.center,
             child: Text(

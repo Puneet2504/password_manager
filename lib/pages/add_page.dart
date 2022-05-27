@@ -30,7 +30,7 @@ class _AddPageState extends State<AddPage> {
     _password.addListener(() => setState(() {}));
   }
 
-  bool isPasswordVisible = false;
+  bool isPasswordVisible = true;
 
   @override
   Widget build(BuildContext context) {
