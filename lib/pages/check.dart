@@ -17,14 +17,12 @@ class Checker extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
-            print('True login');
             return FacePage();
           } else if (snapshot.hasError) {
             return const Center(
               child: Text('Something Went Wrong!'),
             );
           } else {
-            print('True Logout');
             return const LoginPage();
           }
         },
