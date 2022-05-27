@@ -2,9 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:password_manager/pages/face_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:password_manager/pages/login_page.dart';
-import 'package:password_manager/provider/google_signin_provider.dart';
-import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -20,11 +17,8 @@ class ProfilePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // Navigator.of(context).pushReplacement(
-              //     MaterialPageRoute(builder: (context) => FacePage()));
-              final provider =
-                  Provider.of<GoogleSignInProvider>(context, listen: false);
-              provider.logout();
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => FacePage()));
             },
             icon: const Icon(
               Icons.logout,
