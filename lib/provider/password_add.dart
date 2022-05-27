@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 // class for the Firestore Database
 class FirebaseService {
   final user = FirebaseAuth.instance.currentUser;
-
+  // Void Function insertSubCollection with extra string parameters key and iv which are generated for password encryption different key and iv for different password
   void insertSubCollection(
       String service, String email, String password, String key, String iv) {
     var db = FirebaseFirestore.instance.collection("databases");

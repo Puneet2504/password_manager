@@ -35,6 +35,7 @@ class _AddPageState extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
+    //Generation of Key and iv for password encryption and decryption
     final key = Key.fromSecureRandom(32);
     final iv = IV.fromSecureRandom(16);
 
