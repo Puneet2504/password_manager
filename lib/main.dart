@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: title,
-          theme: ThemeData(primarySwatch: Colors.red),
+          theme: ThemeData(primarySwatch: Colors.purple),
           home: const Checker(),
         ),
       );
