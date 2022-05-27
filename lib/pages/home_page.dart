@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:encrypt/encrypt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Key;
 import 'package:clipboard/clipboard.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,8 +55,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: ListTile(
                           onTap: (() async {
-                            await FlutterClipboard.copy(
-                                documentSnapshot['password']);
+                            await FlutterClipboard.copy(decrypt(
+                                Encrypted.fromBase16(
+                                    documentSnapshot['password']),
+                                Key.fromBase16(documentSnapshot['key']),
+                                IV.fromBase16(documentSnapshot['IV'])));
                             ScaffoldMessenger.of(context).showSnackBar(
                                 snackBars('Copied To Clipboard!'));
                           }),
@@ -123,6 +127,13 @@ class _HomePageState extends State<HomePage> {
       behavior: SnackBarBehavior.floating,
     );
     return snackBar;
+  }
+
+  //String Function to decrypt the password
+  String decrypt(Encrypted password, Key key, IV iv) {
+    final encrypter = Encrypter(AES(key));
+    final decrypted = encrypter.decrypt(password, iv: iv);
+    return decrypted;
   }
 }
 

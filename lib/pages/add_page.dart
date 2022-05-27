@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Key;
 import 'package:password_manager/provider/password_add.dart';
+import 'package:encrypt/encrypt.dart';
 
 class AddPage extends StatefulWidget {
   @override
@@ -34,6 +35,9 @@ class _AddPageState extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
+    final key = Key.fromSecureRandom(32);
+    final iv = IV.fromSecureRandom(16);
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.purple.shade700,
@@ -177,7 +181,11 @@ class _AddPageState extends State<AddPage> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       FirebaseService().insertSubCollection(
-                          _service.text, _email.text, _password.text);
+                          _service.text,
+                          _email.text,
+                          encrypt(_password.text, key, iv),
+                          key.base16,
+                          iv.base16);
                       _email.clear();
                       _service.clear();
                       _password.clear();
@@ -196,7 +204,9 @@ class _AddPageState extends State<AddPage> {
     );
   }
 
-  // void Encrypt() async {
-  //   //print(encryptedS);
-  // }
+  String encrypt(String password, Key key, IV iv) {
+    final encrypter = Encrypter(AES(key));
+    final encrypted = encrypter.encrypt(_password.text, iv: iv);
+    return encrypted.base16;
+  }
 }
