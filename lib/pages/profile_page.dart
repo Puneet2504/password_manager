@@ -12,7 +12,7 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('profile Page'),
+        title: const Text('Profile Page'),
         backgroundColor: Colors.purple.shade700,
         actions: [
           IconButton(
